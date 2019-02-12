@@ -6,5 +6,5 @@ Map a desired directory to `/mnt/data` container mountpoint.
 
 Example:
 ```
-docker run -p 9000:80 -v $PWD:/mnt/data sdenel/nginx-file-listing
+docker run -p 9000:80 -v $PWD:/mnt/data sdenel/docker-nginx-file-listing
 ```
