@@ -1,13 +1,9 @@
-FROM nginx:stable
+FROM nginx:alpine
 
-MAINTAINER Andrey Sizov, andrey.sizov@jetbrains.com
+MAINTAINER Simon DENEL, simondenel1@gmail.com
 
-ENV AUTH='test:YZOheU342o4OU'
+COPY default.conf /etc/nginx/conf.d/
 
-COPY default.conf.template auth.htpasswd.template /etc/nginx/conf.d/
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 
 EXPOSE 80
-
-CMD /bin/bash -c "envsubst < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf \ 
-			&& envsubst < /etc/nginx/conf.d/auth.htpasswd.template > /etc/nginx/conf.d/auth.htpasswd \ 
-			&& nginx -g 'daemon off;'"
